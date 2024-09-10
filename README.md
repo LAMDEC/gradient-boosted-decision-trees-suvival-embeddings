@@ -1,2 +1,1 @@
-# gradient-boosted-decision-trees-suvival-embeddings
-*GBDTSE*: Gradient Boosted Decision Trees Survival Embeddings
+# Gradient-Boosted Trees Survival Embeddings (*GBTSE*)
