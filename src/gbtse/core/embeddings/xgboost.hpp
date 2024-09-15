@@ -8,15 +8,13 @@
 #include <vector>
 #include <xgboost/c_api.h>
 
-#define safe_xgboost(call)                                                     \
-  {                                                                            \
-    int err = (call);                                                          \
-    if (err != 0) {                                                            \
-      throw std::runtime_error(std::string(__FILE__) + ":" +                   \
-                               std::to_string(__LINE__) + ": error in " +      \
-                               #call + ":" + XGBGetLastError());               \
-    }                                                                          \
+void safe_xgboost(int code) {
+  if (code != 0) {
+    throw std::runtime_error(std::string(__FILE__) + ":" +
+                             std::to_string(__LINE__) + ": error in" + ": " +
+                             XGBGetLastError());
   }
+}
 
 int xgboost_embedding() {
   DMatrixHandle matrix_h[1]; // handle to DMatrix
@@ -109,7 +107,7 @@ int xgboost_embedding() {
   safe_xgboost(XGBoosterSetParam(booster_h, "aft_loss_distribution", "normal"));
 
   for (int i = 0; i < 6; i++) {
-    safe_xgboost(XGBoosterUpdateOneIter(booster_h, i, matrix_h[0]))
+    safe_xgboost(XGBoosterUpdateOneIter(booster_h, i, matrix_h[0]));
   }
 
   bst_ulong num_trees;
