@@ -8,7 +8,7 @@
 #include <vector>
 #include <xgboost/c_api.h>
 
-#include "./embeddings.hpp"
+#include "./embedder.hpp"
 
 void inline safe_xgboost(int code) {
   if (code != 0) {
@@ -18,7 +18,7 @@ void inline safe_xgboost(int code) {
   }
 }
 
-class XGBoostEmbedder : Embedder {
+class XGBoostEmbedder : virtual Embedder {
 public:
   void readCSV(std::string filename) override {
     std::string config =
